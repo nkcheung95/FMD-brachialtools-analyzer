@@ -1,47 +1,74 @@
 # FMD-brachialtools-analyzer
 R script for the analysis of FMD including viscosity and shear stress calculations
-FMD_R ANALYSIS README
 
-It is imperative that files are set up properly before use with FMD_R 
+The FMD-R Scripts are designed for the automated analysis of FMD and blood viscosity using data from Brachial Tools Software and Labchart
 
-If running for the first time, COPY .r file into directory you want the files to populate 
-- This folder will hold all data for the entire project/analysis
-- Run the file by opening it in RStudio. select all the text from the r file (should load in top left workspace) and click Run
+Requires:
+ R ([link](https://mirror.rcg.sfu.ca/mirror/CRAN/)) and RStudio ([link](https://posit.co/downloads/)) 
+## Creating your project folder
 
-You should now have a folder labelled "data" nested in the folder alongside your .r file
+Begin setting up for analysis by creating a project in RStudio (File > New Directory > New Project).
+In the new project console, copy and paste the following code:
+```R
+source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_mod_visc.r")
+```
+
+You should now have a folder labelled "data" nested in the folder 
 Into this folder, you can now drop your working data
+
+## File Preparation
 
 Place the following files into the "data" folder
 
-File 1: Baseline diameter data report exported from brachial tools (.txt file)
--Settings for export:
+ 1. File 1: Baseline diameter data report exported from brachial tools (.txt file)
+- Settings for export:
 	Must include Reader ID, Participant ID, and StudyType as condition, export report as .csv
 - rename BL_DIA.txt
-File 2: Post-occlusion data report exported from brachial tools (.txt file)
--Settings for export:
+2. File 2: Post-occlusion data report exported from brachial tools (.txt file)
+- Settings for export:
 	Must include Reader ID, Participant ID, and StudyType as condition, export report as .csv
 - rename FMD_DIA.txt
-File 3: Baseline labchart data exported from labchart - 
-- Settings for export:
-	channels:QDAT flow, Finger Pressure <- Channel order must match
-	export selection(highlight baseline data)
-	downsample by 333 for 10ksample rate (33 for 1k sample rate)
-	blockheaderON,
-	Time selected as true (always seconds)
-	everything else unchecked
-- rename BL_LC.txt
-File 4: Post-occlusion labchart data exported from labchart - 
-- Settings for export:
-	channels:QDAT flow, Finger Pressure <- Channel order must match
-	export selection(highlight post-occlusion data)
-	downsample by 333 for 10ksample rate (33 for 1k sample rate)
-	blockheaderON,
-	Time selected as true
-	everything else unchecked
-- rename BL_LC.txt
-File 5: Viscometer report (.csv)
-- rename VISC.csv
-- if no visco report omit this file and run the NO_VISC version of the script.
 
-Run R script
-Results immediately available for QC in working directory and saved under participant IDs
+3. File 3: Baseline labchart data exported from labchart - 
+- Settings for export:
+	- channels: Flow velocity, Finger pressure <- Channel order must match
+	- export selection(highlight baseline data)
+	- downsample by 333 for 10ksample rate (33 for 1k sample rate)
+	- blockheaderON,
+	- Time selected as true (always seconds)
+	- everything else unchecked
+- rename BL_LC.txt
+4. File 4: Post-occlusion labchart data exported from labchart - 
+- Settings for export:
+	- See above
+- rename BL_LC.txt
+5. File 5: Viscometer report (.csv)
+- rename VISC.csv
+- if no visco report omit this file and run the no_visc version of the script.
+
+Run Script version required using given command
+
+ - FMD-R mod_visc
+	 - For application of a 2-phase exponential decay for shear-dependent viscosity modelling
+```R
+source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_mod_visc.r")
+```
+ - FMD-R sp_visc
+	 - Single-point viscosity at a shear rate of 225
+```R
+source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_sp_visc.r")
+```
+ - FMD-R no_visc
+	 - For running FMD's without viscosity
+```R
+source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_no_visc.r")
+```
+- FMD-R mod_visc_FLIPPED
+	- FMD-R mod_visc with the labchart channels in opposite order (finger pressure, flow velocity)
+```R
+source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_mod_visc_FLIPPED.r")
+```
+
+Results immediately available for QC in working directory and saved under participant IDs from the brachial tools output.
+
+
