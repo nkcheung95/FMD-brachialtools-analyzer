@@ -13,7 +13,7 @@ In the new project console, copy and paste the following code:
 source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_mod_visc.r")
 ```
 
-You should now have a folder labelled "data" nested in the folder 
+You should now have a folder labelled "data" nested in the working folder.
 Into this folder, you can now drop your working data
 
 ## File Preparation
