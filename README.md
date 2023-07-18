@@ -45,7 +45,7 @@ Place the following files into the "data" folder
 5. File 5: Viscometer report (.csv)
 - rename VISC.csv
 - if no visco report omit this file and run the no_visc version of the script.
-
+## Analyzing Files
 Run Script version required using given command
 
  - FMD-R mod_visc
