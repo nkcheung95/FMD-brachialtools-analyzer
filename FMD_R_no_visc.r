@@ -99,7 +99,7 @@ smo_fing_pres <- rollmean(fmd_data$fing_pres, k=90, fill= NA)
 smo_fmd <- cbind(smo_dia,smo_fing_pres,smo_Qvel,smo_index)
 smo_fmd <- as.data.frame(smo_fmd)
 fmd_clean <- as.data.frame(smo_fmd)
-fmd_clean$smo_dia <- na_seadec(fmd_clean$smo_dia)
+fmd_clean$smo_dia <- na_seadec(fmd_clean$smo_dia,find_frequency=TRUE)
 fmd_clean <- rename(fmd_clean,"diameter"="smo_dia","flow_vel"="smo_Qvel","fing_pres"="smo_fing_pres","index"="smo_index")
 
 
