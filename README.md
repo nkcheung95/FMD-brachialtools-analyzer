@@ -10,7 +10,7 @@ Requires:
 Begin setting up for analysis by creating a project in RStudio (File > New Directory > New Project).
 In the new project console, copy and paste the following code:
 ```R
-source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_mod_visc.r")
+source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_mod_visc.r?raw=TRUE")
 ```
 
 You should now have a folder labelled "data" nested in the working folder.
@@ -41,7 +41,7 @@ Place the following files into the "data" folder
 4. File 4: Post-occlusion labchart data exported from labchart - 
 - Settings for export:
 	- See above
-- rename BL_LC.txt
+- rename FMD_LC.txt
 5. File 5: Viscometer report (.csv)
 - rename VISC.csv
 - if no visco report omit this file and run the no_visc version of the script.
@@ -51,22 +51,22 @@ Run Script version required using given command
  - FMD-R mod_visc
 	 - For application of a 2-phase exponential decay for shear-dependent viscosity modelling
 ```R
-source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_mod_visc.r")
+source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_mod_visc.r?raw=TRUE")
 ```
  - FMD-R sp_visc
 	 - Single-point viscosity at a shear rate of 225
 ```R
-source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_sp_visc.r")
+source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_sp_visc.r?raw=TRUE")
 ```
  - FMD-R no_visc
 	 - For running FMD's without viscosity
 ```R
-source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_no_visc.r")
+source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_no_visc.r?raw=TRUE")
 ```
 - FMD-R mod_visc_FLIPPED
 	- FMD-R mod_visc with the labchart channels in opposite order (finger pressure, flow velocity)
 ```R
-source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_mod_visc_FLIPPED.r")
+source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_mod_visc_FLIPPED.r?raw=TRUE")
 ```
 
 Results immediately available for QC in working directory and saved under participant IDs from the brachial tools output.
