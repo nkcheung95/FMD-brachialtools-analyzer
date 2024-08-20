@@ -68,7 +68,11 @@ source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R
 ```R
 source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_mod_visc_FLIPPED.r?raw=TRUE")
 ```
-
+- FMD-R no_visc_FLIPPED
+	- FMD-R no_visc with the labchart channels in opposite order (finger pressure, flow velocity)
+```R
+source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_no_visc_FLIPPED.r?raw=TRUE")
+```
 Results immediately available for QC in working directory and saved under participant IDs from the brachial tools output.
 
 
