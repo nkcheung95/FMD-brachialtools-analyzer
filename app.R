@@ -10,13 +10,13 @@ ui <- fluidPage(
   # Centered button layout
   fluidRow(
     column(12, align = "center",
-           actionButton("setwd_btn", "Set Working Directory", width = '300px', style = "font-size: 20px; margin: 20px;"),
-           actionButton("fmd_mod", "FMD Analysis with viscosity model (flow, finger pressure)", width = '300px', style = "font-size: 20px; margin: 20px;"),
-           actionButton("fmd_mod_flip", "FMD Analysis with viscosity model (finger pressure, flow)", width = '300px', style = "font-size: 20px; margin: 20px;"),
-           actionButton("fmd_sp", "FMD Analysis with single-point viscosity (flow, finger pressure)", width = '300px', style = "font-size: 20px; margin: 20px;"),
-           actionButton("fmd_sp_flip", "FMD Analysis with single-point viscosity (finger pressure, flow)", width = '300px', style = "font-size: 20px; margin: 20px;"),
-           actionButton("fmd_no_v", "FMD Analysis without viscosity (flow, finger pressure)", width = '300px', style = "font-size: 20px; margin: 20px;"),
-           actionButton("fmd_no_v_flip", "FMD Analysis without viscosity (finger pressure, flow)", width = '300px', style = "font-size: 20px; margin: 20px;")
+           actionButton("setwd_btn", "Set Working/Output Directory", width = '800px', style = "font-size: 14px; margin: 20px;"),
+           actionButton("fmd_mod", "FMD Analysis with viscosity model (flow, finger pressure)", width = '800px', style = "font-size: 14px; margin: 20px;"),
+           actionButton("fmd_mod_flip", "FMD Analysis with viscosity model (finger pressure, flow)", width = '800px', style = "font-size: 14px; margin: 20px;"),
+           actionButton("fmd_sp", "FMD Analysis with single-point viscosity (flow, finger pressure)", width = '800px', style = "font-size: 14px; margin: 20px;"),
+           actionButton("fmd_sp_flip", "FMD Analysis with single-point viscosity (finger pressure, flow)", width = '800px', style = "font-size: 14px; margin: 20px;"),
+           actionButton("fmd_no_v", "FMD Analysis without viscosity (flow, finger pressure)", width = '800px', style = "font-size: 14px; margin: 20px;"),
+           actionButton("fmd_no_v_flip", "FMD Analysis without viscosity (finger pressure, flow)", width = '800px', style = "font-size: 14px; margin: 20px;")
            
     )
   ),

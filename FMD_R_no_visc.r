@@ -18,19 +18,6 @@ library(bayestestR)
 
 #filesystem_create
 
-
-
-folder <- "data"
-
-if (file.exists(folder)) {
-  
-  cat("The folder already exists")
-  
-} else {
-  
-  dir.create(folder)
-  
-}
 folder2 <- "Master FMD Export"
 
 if (file.exists(folder2)) {
@@ -53,24 +40,30 @@ if (file.exists(folder4)) {
   
 }
 
+#read files
+directory <- tclvalue(tkchooseDirectory())
+bl_dia_file <- file.path(directory, "BL_DIA.txt")
+fmd_dia_file <- file.path(directory, "FMD_DIA.txt")
+bl_lc_file <- file.path(directory, "BL_LC.txt")
+fmd_lc_file <- file.path(directory, "FMD_LC.txt")
 
 #dataload labchart files downsample by 333 to match DIA, blockheaderON, Time selected as true
-dia_data <- read.delim("data/FMD_DIA.txt", header=F,sep=",", skip=48)
+dia_data <- read.delim(fmd_dia_file, header=F,sep=",", skip=48)
 dia_data <- rename(dia_data, "diameter"= "V2", "index"="V1")
-lc_data <- read.delim("data/FMD_LC.txt", header=F, sep="\t",skip=9)
-lc_bl_data <- read.delim("data/BL_LC.txt", header=F, sep="\t",skip=9)
-#visco_data <- read.csv("data/VISC.csv", header=F,skip=45)
+lc_data <- read.delim(fmd_lc_file, header=F, sep="\t",skip=9)
+lc_bl_data <- read.delim(bl_lc_file, header=F, sep="\t",skip=9)
 dia_data <- subset(dia_data, select = c("diameter","index"))
 #file_id
 
-
-fmd_data <- cbind(head(dia_data,5000),head(lc_data,5000))
+fmd_length <- min(nrow(dia_data),nrow(lc_data))
+fmd_data <- cbind(head(dia_data,fmd_length),head(lc_data,fmd_length))
 fmd_data <- rename(fmd_data,"time"="V1","flow_vel"="V2","fing_pres"="V3")
 
-bl_data <- read.delim("data/BL_DIA.txt", header=F,sep=",",skip=49)
+bl_data <- read.delim(bl_dia_file, header=F,sep=",",skip=49)
 bl_data <- rename(bl_data, "diameter"= "V2", "index"="V1","participant_id"="V4","condition_id"="V3","reader"="V10")
 bl_data <- subset(bl_data, select = c("diameter","index","participant_id","condition_id","reader" ))
-bl_data <- cbind(head(lc_bl_data,1200),head(bl_data,1200))
+bl_length<- min(nrow(lc_bl_data),nrow(bl_data))
+bl_data <- cbind(head(lc_bl_data,bl_length),head(bl_data,bl_length))
 bl_data <- rename(bl_data, "time"="V1", "flow_vel"="V2", "fing_pres"="V3")
 
 participant.id<- as.character(bl_data[1,6])
@@ -135,8 +128,31 @@ max_row_num <- which(row.names(fmd_clean) == max_dia_row)
 auc_df <- cbind.data.frame(head(fmd_clean$shear_rate,max_row_num),head(fmd_clean$index,max_row_num))
 auc_df <- rename(auc_df,"shearrate"="head(fmd_clean$shear_rate, max_row_num)","index"="head(fmd_clean$index, max_row_num)")
 auc_df$time <- auc_df$index/30
+# Create a popup window for input
+input_popup <- tktoplevel()
+tkwm.title(input_popup, "Input AUC Start Time")
+
+# Create a label and entry box for the user to enter the start time
+label <- tklabel(input_popup, text = "Enter the start time in seconds:")
+entry <- tkentry(input_popup)
+
+# Button to submit the input
+submit_button <- tkbutton(input_popup, text = "Submit", command = function() {
+  auc_start <<- as.numeric(tclvalue(tkget(entry)))  # Get input value
+  tkdestroy(input_popup)  # Close the popup after submission
+})
+
+# Arrange the widgets
+tkgrid(label)
+tkgrid(entry)
+tkgrid(submit_button)
+
+# Wait for the input to be submitted
+tkwait.window(input_popup)
+
 auc_df[is.na(auc_df)] <- 0
-auc_ss <- area_under_curve(auc_df$time, auc_df$shearrate, method = "trapezoid")
+trimmed_auc_df <- auc_df[auc_df$time >= auc_start, ]
+auc_ss <- area_under_curve(trimmed_auc_df$time, trimmed_auc_df$shearrate, method = "trapezoid")
 
 #outcomes
 bl_diameter <- mean(bl_data$diameter,na.rm=TRUE)
@@ -212,10 +228,9 @@ if (file.exists(file.path(getwd(),"Analyzed",participant.id,file.id,"data","BL_D
   cat("The folder already exists")
   
 } else {
-  data_files <- list.files("data")
-  file_copy(file.path(getwd(),"data",data_files),file.path(getwd(),"Analyzed",participant.id,file.id,"data"),data_files)
+  data_files <- list.files(directory)
+  file_copy(file.path(directory,data_files),file.path(getwd(),"Analyzed",participant.id,file.id,"data"),data_files)
 }
-
 #results_print csv
 write.csv(results,file.path(getwd(),"Analyzed",participant.id,file.id,"results","FMD_results.csv"), row.names=FALSE)
 write.csv(bl_data,file.path(getwd(),"Analyzed",participant.id,file.id,"results","BL_data_clean.csv"), row.names=FALSE)
