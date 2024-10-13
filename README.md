@@ -48,6 +48,11 @@ Place the following files into the "data" folder
 ## Analyzing Files
 Run Script version required using given command
 
+NEW* Launcher here
+```R
+source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMDBTOOLSAnalysis-loader.R?raw=TRUE")
+```
+
  - FMD-R mod_visc
 	 - For application of a 2-phase exponential decay for shear-dependent viscosity modelling
 ```R
