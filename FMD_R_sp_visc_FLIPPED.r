@@ -1,19 +1,30 @@
-#libload
-packages <- c("tidyverse", "zoo", "imputeTS","stringr","magick","ggplot2","devtools","bayestestR","curl")
+### LIBLOAD
 
-install.packages(setdiff(packages, rownames(installed.packages()))) 
-library(devtools)
-library(curl)
-library(tidyverse)
-library(zoo)
-library(imputeTS)
-library(stringr)
-library(magick)
-library(grid)
-library(ggplot2)
-library(fs)
-library(bayestestR)
-install_github("TJMurphy/nlfitr", force=TRUE)
+# Define the packages you want to use
+packages <- c(
+  "tidyverse", "zoo", "imputeTS", "stringr", "magick", 
+  "ggplot2", "devtools", "bayestestR", "curl"
+)
+
+# Function to install and load packages
+install_load_packages <- function(packages) {
+  # Check which packages are not installed
+  not_installed <- setdiff(packages, rownames(installed.packages()))
+  
+  # Install the missing packages
+  if (length(not_installed) > 0) {
+    install.packages(not_installed)
+  }
+  
+  # Load all the packages
+  invisible(sapply(packages, library, character.only = TRUE))
+}
+
+# Call the function to install and load packages
+install_load_packages(packages)
+
+# Additional step for installing a package from GitHub
+devtools::install_github("TJMurphy/nlfitr", force = TRUE)
 
 
 #filesystem_create
