@@ -238,10 +238,10 @@ write.csv(fmd_clean,file.path(getwd(),"Analyzed",participant.id,file.id,"results
 
 
 
-if (file.exists("Master FMD Export/MASTER_FMD_DATA.csv") ){
+if (file.exists("Master FMD Export/NO_VISC_FMD_DATA.csv") ){
   
   write.table( results,  
-               file="Master FMD Export/MASTER_FMD_DATA.csv", 
+               file="Master FMD Export/NO_VISC_FMD_DATA.csv", 
                append = T, 
                sep=',', 
                row.names=F, 
@@ -250,7 +250,7 @@ if (file.exists("Master FMD Export/MASTER_FMD_DATA.csv") ){
   
 } else {
   write.table( results,  
-               file="Master FMD Export/MASTER_FMD_DATA.csv", 
+               file="Master FMD Export/NO_VISC_FMD_DATA.csv", 
                append = T, 
                sep=',', 
                row.names=F, 
