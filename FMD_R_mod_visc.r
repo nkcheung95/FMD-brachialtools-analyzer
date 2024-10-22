@@ -3,7 +3,7 @@
 # Define the packages you want to use
 packages <- c(
   "tidyverse", "zoo", "imputeTS", "stringr", "magick", 
-  "ggplot2", "devtools", "bayestestR", "curl"
+  "ggplot2", "devtools", "bayestestR", "curl","fs"
 )
 
 # Function to install and load packages
