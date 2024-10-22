@@ -183,9 +183,6 @@ auc_df[is.na(auc_df)] <- 0
 trimmed_auc_df <- auc_df[auc_df$time >= auc_start, ]
 fmd_clean <- fmd_clean[fmd_clean$time >= auc_start, ]
 auc_ss <- area_under_curve(trimmed_auc_df$time, trimmed_auc_df$shearstress, method = "trapezoid")
-
-trim_length <- nrow(trimmed_auc_df)
-fmd_clean <- tail(fmd_clean,trim_length)
 #outcomes
 bl_diameter <- mean(bl_data$diameter,na.rm=TRUE)
 bl_fvc <- mean(bl_data$fvc,na.rm=TRUE)
