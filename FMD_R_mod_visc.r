@@ -61,7 +61,7 @@ visc_file <- file.path(directory, "VISC.csv")
 
 #dataload labchart files downsample by 333 to match DIA, blockheaderON, Time selected as true
 dia_data <- read.delim(fmd_dia_file, header=F,sep=",", skip=49)
-dia_data <- rename(dia_data, "diameter"= "V2", "index"="V1", "participant_id"="V3","condition_id"="V5","reader"="V10")
+dia_data <- rename(dia_data, "diameter"= "V2", "index"="V1", "participant_id"="V4","condition_id"="V5","reader"="V10")
 lc_data <- read.delim(fmd_lc_file, header=F, sep="\t",skip=9)
 lc_bl_data <- read.delim(bl_lc_file, header=F, sep="\t",skip=9)
 visco_data <- read.csv(visc_file, header=F,skip=45)
