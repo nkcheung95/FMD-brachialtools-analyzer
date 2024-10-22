@@ -118,7 +118,7 @@ smo_fmd <- as.data.frame(smo_fmd)
 fmd_clean <- as.data.frame(smo_fmd)
 
 fmd_clean <- rename(fmd_clean,"diameter"="smo_dia","flow_vel"="smo_Qvel","fing_pres"="smo_fing_pres","index"="smo_index")
-
+fmd_clean$time <- fmd_clean$index/30
 #variablecreate
 #visco model
 library(nlfitr)
@@ -181,9 +181,10 @@ tkwait.window(input_popup)
 
 auc_df[is.na(auc_df)] <- 0
 trimmed_auc_df <- auc_df[auc_df$time >= auc_start, ]
+fmd_clean <- fmd_clean[fmd_clean$time >= auc_start, ]
 auc_ss <- area_under_curve(trimmed_auc_df$time, trimmed_auc_df$shearstress, method = "trapezoid")
 
-trim_length <- length(trimmed_auc_df)
+trim_length <- nrow(trimmed_auc_df)
 fmd_clean <- tail(fmd_clean,trim_length)
 #outcomes
 bl_diameter <- mean(bl_data$diameter,na.rm=TRUE)
