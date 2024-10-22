@@ -1,5 +1,5 @@
 packages <- c(
-  "shiny","shinycssloaders","tidyverse", "zoo", "imputeTS","stringr","magick","ggplot2","devtools","bayestestR","curl"
+  "shiny","shinycssloaders","tidyverse", "zoo", "imputeTS","stringr","magick","ggplot2","devtools","bayestestR","curl","fs","tcltk"
 )
 
 # Function to install and load packages
