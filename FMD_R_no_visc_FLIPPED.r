@@ -163,6 +163,7 @@ tkwait.window(input_popup)
 
 auc_df[is.na(auc_df)] <- 0
 trimmed_auc_df <- auc_df[auc_df$time >= auc_start, ]
+fmd_clean <- fmd_clean[fmd_clean$time >= auc_start, ]
 auc_ss <- area_under_curve(trimmed_auc_df$time, trimmed_auc_df$shearrate, method = "trapezoid")
 
 #outcomes
