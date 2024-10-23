@@ -193,7 +193,7 @@ server <- function(input, output, session) {
     later::later(function() {
       # Try to source the Analysis script
       tryCatch({
-        source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_mod_visc.r?raw=TRUE")
+        source("https://github.com/nkcheung95/FMD-brachialtools-analyzer/blob/main/FMD_R_no_visc.r?raw=TRUE")
         status("FMD Analysis Completed!")
       }, error = function(e) {
         status(paste("Error during FMD Analysis:", e$message))
