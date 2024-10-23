@@ -109,7 +109,7 @@ if (file.exists(file.path(getwd(),"Analyzed",participant.id,file.id,folder3), re
 
 #smooth
 fill_dia <- na_seadec(fmd_data$diameter)
-smo_index <- seq(1, 5000, by = 1) 
+smo_index <- seq(1, fmd_length, by = 1) 
 smo_dia <- rollmean(fill_dia, k = 90, fill = NA)
 smo_Qvel <- rollmean(fmd_data$flow_vel, k=90, fill= NA)
 smo_fing_pres <- rollmean(fmd_data$fing_pres, k=90, fill= NA)
@@ -118,7 +118,7 @@ smo_fmd <- as.data.frame(smo_fmd)
 fmd_clean <- as.data.frame(smo_fmd)
 
 fmd_clean <- rename(fmd_clean,"diameter"="smo_dia","flow_vel"="smo_Qvel","fing_pres"="smo_fing_pres","index"="smo_index")
-
+fmd_clean$time <- fmd_clean$index/30
 #variablecreate
 #visco model
 library(nlfitr)
@@ -224,13 +224,13 @@ lines(visco_data$visc_sr,predict(visc_fit),col="green")
 dev.off()
 
 png("plots/DIA_PO.png")
-plot(fmd_clean$index,fmd_clean$diameter,xlab=paste(file.id,"index"),ylab="diameterPO",col = "#FF5733",pch=16)
+plot(fmd_clean$time,fmd_clean$diameter,xlab=paste(file.id,"index"),ylab="diameterPO",col = "#FF5733",pch=16)
 dev.off()
 png("plots/SR_PO.png")
-plot(fmd_clean$index,fmd_clean$shear_rate,xlab=paste(file.id,"index"),ylab="shear ratePO",col = "#FF5733",pch=16)
+plot(fmd_clean$time,fmd_clean$shear_rate,xlab=paste(file.id,"index"),ylab="shear ratePO",col = "#FF5733",pch=16)
 dev.off()
 png("plots/FV_PO.png")
-plot(fmd_clean$index,fmd_clean$flow_vel,xlab=paste(file.id,"index"),ylab="flow velocityPO",col = "#FF5733",pch=16)
+plot(fmd_clean$time,fmd_clean$flow_vel,xlab=paste(file.id,"index"),ylab="flow velocityPO",col = "#FF5733",pch=16)
 dev.off()
 png("plots/SS_AUC.png")
 plot(trimmed_auc_df$time,trimmed_auc_df$shearstress,xlab=paste(file.id,"time"),ylab="shear stressPO",col = "pink",pch=16)
