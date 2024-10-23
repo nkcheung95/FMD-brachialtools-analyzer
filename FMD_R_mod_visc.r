@@ -109,7 +109,7 @@ if (file.exists(file.path(getwd(),"Analyzed",participant.id,file.id,folder3), re
 
 #smooth
 fill_dia <- na_seadec(fmd_data$diameter)
-smo_index <- seq(1, 5000, by = 1) 
+smo_index <- seq(1, fmd_length, by = 1) 
 smo_dia <- rollmean(fill_dia, k = 90, fill = NA)
 smo_Qvel <- rollmean(fmd_data$flow_vel, k=90, fill= NA)
 smo_fing_pres <- rollmean(fmd_data$fing_pres, k=90, fill= NA)
