@@ -180,9 +180,8 @@ tkgrid(submit_button)
 tkwait.window(input_popup)
 
 auc_df[is.na(auc_df)] <- 0
-trimmed_auc_df <- auc_df[auc_df$time >= auc_start, ]
 fmd_clean <- fmd_clean[fmd_clean$time >= auc_start, ]
-auc_ss <- area_under_curve(trimmed_auc_df$time, trimmed_auc_df$shearstress, method = "trapezoid")
+auc_ss <- area_under_curve(auc_df$time, auc_df$shearstress, method = "trapezoid")
 #outcomes
 bl_diameter <- mean(bl_data$diameter,na.rm=TRUE)
 bl_fvc <- mean(bl_data$fvc,na.rm=TRUE)
@@ -233,7 +232,7 @@ png("plots/FV_PO.png")
 plot(fmd_clean$time,fmd_clean$flow_vel,xlab=paste(file.id,"index"),ylab="flow velocityPO",col = "#FF5733",pch=16)
 dev.off()
 png("plots/SS_AUC.png")
-plot(trimmed_auc_df$time,trimmed_auc_df$shearstress,xlab=paste(file.id,"time"),ylab="shear stressPO",col = "pink",pch=16)
+plot(auc_df$time,auc_df$shearstress,xlab=paste(file.id,"time"),ylab="shear stressPO",col = "pink",pch=16)
 dev.off()
 #combine and report
 # Load the six images into R using the png package
